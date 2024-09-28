@@ -9,6 +9,8 @@ use PHPUnit\Framework\TestCase;
 use function ModernBx\CommonFunctions\attrs;
 use function ModernBx\CommonFunctions\format;
 
+use const ModernBx\CommonFunctions\Constants\Attr\ATTR_PATTERN_STD;
+
 class AttrsTest extends TestCase
 {
     /**

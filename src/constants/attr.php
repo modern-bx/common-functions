@@ -1,9 +1,6 @@
 <?php
 
-if (!defined("ATTR_PATTERN_STD")) {
-    define("ATTR_PATTERN_STD", '{key}="{value}"');
-}
+namespace ModernBx\CommonFunctions\Constants\Attr;
 
-if (!defined("ATTR_PATTERN_DATA")) {
-    define("ATTR_PATTERN_DATA", 'data-{key}="{value}"');
-}
+const ATTR_PATTERN_STD = '{key}="{value}"';
+const ATTR_PATTERN_DATA = 'data-{key}="{value}"';

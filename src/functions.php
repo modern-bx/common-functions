@@ -4,6 +4,9 @@
 
 namespace ModernBx\CommonFunctions;
 
+use const ModernBx\CommonFunctions\Constants\Attr\ATTR_PATTERN_DATA;
+use const ModernBx\CommonFunctions\Constants\Attr\ATTR_PATTERN_STD;
+
 if (!function_exists("classlist")) {
     /**
      * Преобразует массив CSS-классов в строку по следующему правилу:
