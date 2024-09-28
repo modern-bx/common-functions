@@ -185,7 +185,7 @@ if (!function_exists("preg_first")) {
     }
 }
 
-if (!function_exists("check_json_safety")) {
+if (!function_exists("get_invalid_json_paths")) {
     /**
      * Рекурсивно проверяет массив на предмет наличия невалидных для формата JSON PHP-значений
      * (например, INF или строки в формате, отличном от UTF-8).
@@ -193,23 +193,25 @@ if (!function_exists("check_json_safety")) {
      * Возвращаем массив со списком путей к таким значениям (в виде последовательности ключей).
      *
      * @param array<mixed> $input
-     * @param array<mixed> $acc
-     * @param array<mixed> $stack
      * @return array<mixed>
      */
-    function get_invalid_json_paths(array $input, array &$acc = [], array $stack = []): array
+    function get_invalid_json_paths(array $input): array
     {
-        foreach ($input as $key => $value) {
-            if (json_encode($value) === false) {
-                if (is_array($value)) {
-                    get_invalid_json_paths($value, $acc, array_merge($stack, [$key]));
-                } else {
-                    $acc[] = array_merge($stack, [$key]);
+        $walker = function (array $input, array &$acc = [], array $stack = []) use (&$walker): array {
+            foreach ($input as $key => $value) {
+                if (json_encode($value) === false) {
+                    if (is_array($value)) {
+                        $walker($value, $acc, array_merge($stack, [$key]));
+                    } else {
+                        $acc[] = array_merge($stack, [$key]);
+                    }
                 }
             }
-        }
 
-        return $acc;
+            return $acc;
+        };
+
+        return $walker($input);
     }
 }
 
