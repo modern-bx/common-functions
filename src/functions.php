@@ -1,8 +1,8 @@
 <?php
 
-declare(strict_types=1);
-
 /** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
+
+declare(strict_types=1);
 
 namespace ModernBx\CommonFunctions;
 
