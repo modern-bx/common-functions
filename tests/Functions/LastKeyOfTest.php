@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\last_key_of;
+
 class LastKeyOfTest extends TestCase
 {
     /**
@@ -29,6 +31,6 @@ class LastKeyOfTest extends TestCase
      */
     public function testValidOptions(array $input, mixed $expected): void
     {
-        $this->assertSame(\last_key_of($input), $expected);
+        $this->assertSame(last_key_of($input), $expected);
     }
 }

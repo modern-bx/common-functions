@@ -2,9 +2,11 @@
 
 /** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
 
-namespace Functions;
+namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
+
+use function ModernBx\CommonFunctions\last_of;
 
 class LastOfTest extends TestCase
 {
@@ -30,6 +32,6 @@ class LastOfTest extends TestCase
      */
     public function testValidOptions(?array $input, mixed $expected): void
     {
-        $this->assertSame(\last_of($input), $expected);
+        $this->assertSame(last_of($input), $expected);
     }
 }

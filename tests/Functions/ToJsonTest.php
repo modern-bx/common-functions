@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\to_json;
+
 class ToJsonTest extends TestCase
 {
     /**
@@ -38,7 +40,7 @@ class ToJsonTest extends TestCase
      */
     public function testValidOptions(mixed $input, string|false $expected): void
     {
-        $this->assertSame(\to_json($input), $expected);
+        $this->assertSame(to_json($input), $expected);
     }
 
     /**
@@ -51,6 +53,6 @@ class ToJsonTest extends TestCase
     {
         $this->expectException(\JsonException::class);
 
-        $this->assertSame(\to_json($input), $expected);
+        $this->assertSame(to_json($input), $expected);
     }
 }

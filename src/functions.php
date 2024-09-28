@@ -1,5 +1,9 @@
 <?php
 
+/** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
+
+namespace ModernBx\CommonFunctions;
+
 if (!function_exists("classlist")) {
     /**
      * Преобразует массив CSS-классов в строку по следующему правилу:
@@ -193,7 +197,7 @@ if (!function_exists("check_json_safety")) {
         foreach ($input as $key => $value) {
             if (json_encode($value) === false) {
                 if (is_array($value)) {
-                    \get_invalid_json_paths($value, $acc, array_merge($stack, [$key]));
+                    get_invalid_json_paths($value, $acc, array_merge($stack, [$key]));
                 } else {
                     $acc[] = array_merge($stack, [$key]);
                 }
@@ -300,7 +304,7 @@ if (!function_exists("to_json")) {
      * @param mixed $value
      * @param int|null $flags
      * @return string|false
-     * @throws JsonException
+     * @throws \JsonException
      */
     function to_json(mixed $value, ?int $flags = null): string|false
     {
@@ -315,7 +319,7 @@ if (!function_exists("to_json")) {
         $result = json_encode($value, $flags);
 
         if (!defined("JSON_THROW_ON_ERROR") && json_last_error()) {
-            throw new JsonException(json_last_error_msg());
+            throw new \JsonException(json_last_error_msg());
         }
 
         return $result;
@@ -331,8 +335,8 @@ if (!function_exists("from_json")) {
      * @param string $value
      * @param int $flags
      * @return mixed
-     * @throws JsonException
-     * @throws RuntimeException
+     * @throws \JsonException
+     * @throws \RuntimeException
      */
     function from_json(string $value, int $flags = 0): mixed
     {
@@ -343,7 +347,7 @@ if (!function_exists("from_json")) {
         $result = json_decode($value, true, 512, $flags);
 
         if (!defined("JSON_THROW_ON_ERROR") && json_last_error()) {
-            throw new JsonException(json_last_error_msg());
+            throw new \JsonException(json_last_error_msg());
         }
 
         return $result;
@@ -373,7 +377,7 @@ if (!function_exists("attrs")) {
             if (is_callable($pattern)) {
                 $pair .= $pattern($key, $value);
             } else {
-                $pair = \format($pattern, [
+                $pair = format($pattern, [
                     "key" => $key,
                     "value" => htmlspecialchars($value, ENT_QUOTES),
                     "raw_value" => $value,
@@ -402,7 +406,7 @@ if (!function_exists("data_attrs")) {
      */
     function data_attrs(array $attrs): string
     {
-        return \attrs($attrs, ATTR_PATTERN_DATA);
+        return attrs($attrs, ATTR_PATTERN_DATA);
     }
 }
 
@@ -445,7 +449,7 @@ if (!function_exists("first_of")) {
             return null;
         }
 
-        $key = \first_key_of($ary);
+        $key = first_key_of($ary);
 
         if (!isset($key) || !isset($ary[$key])) {
             return null;
@@ -490,7 +494,7 @@ if (!function_exists("last_of")) {
             return null;
         }
 
-        $key = \last_key_of($ary);
+        $key = last_key_of($ary);
 
         if (!isset($key) || !isset($ary[$key])) {
             return null;
@@ -535,7 +539,7 @@ if (!function_exists("index")) {
      * @param array<mixed> $item
      * @param int|string|array<mixed>|callable $index
      * @return mixed
-     * @throws Exception
+     * @throws \Exception
      */
     function index(array $item, int|string|array|callable $index): mixed
     {
@@ -544,9 +548,9 @@ if (!function_exists("index")) {
                 $key = $item[$index] ?? null;
                 break;
             case is_array($index) && $index:
-                $key = \deep_get($item, array_values($index));
+                $key = deep_get($item, array_values($index));
                 if (!is_scalar($key)) {
-                    $key = \to_json($key, JSON_UNESCAPED_UNICODE);
+                    $key = to_json($key, JSON_UNESCAPED_UNICODE);
                 }
                 break;
             case is_callable($index):

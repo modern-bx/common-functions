@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\first_of;
+
 class FirstOfTest extends TestCase
 {
     /**
@@ -28,6 +30,6 @@ class FirstOfTest extends TestCase
      */
     public function testValidOptions(array $input, mixed $expected): void
     {
-        $this->assertSame(\first_of($input), $expected);
+        $this->assertSame(first_of($input), $expected);
     }
 }

@@ -6,6 +6,9 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\attrs;
+use function ModernBx\CommonFunctions\format;
+
 class AttrsTest extends TestCase
 {
     /**
@@ -31,7 +34,7 @@ class AttrsTest extends TestCase
                 "data-foo" => 1,
                 "bar" => "derp",
             ], "data-foo='1' bar='derp'", [function ($key, $value) {
-                return \format("{key}='{value}'", [
+                return format("{key}='{value}'", [
                     "key" => $key,
                     "value" => $value,
                 ]);
@@ -47,6 +50,6 @@ class AttrsTest extends TestCase
      */
     public function testValidOptions(array $input, string $expected, array $args): void
     {
-        $this->assertSame(\attrs($input, $args[0] ?? ATTR_PATTERN_STD), $expected);
+        $this->assertSame(attrs($input, $args[0] ?? ATTR_PATTERN_STD), $expected);
     }
 }

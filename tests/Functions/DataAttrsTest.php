@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\data_attrs;
+
 class DataAttrsTest extends TestCase
 {
     /**
@@ -37,6 +39,6 @@ class DataAttrsTest extends TestCase
      */
     public function testValidOptions(array $input, string $expected): void
     {
-        $this->assertSame(\data_attrs($input), $expected);
+        $this->assertSame(data_attrs($input), $expected);
     }
 }

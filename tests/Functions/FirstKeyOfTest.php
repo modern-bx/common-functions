@@ -5,6 +5,7 @@
 namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
+use function ModernBx\CommonFunctions\first_key_of;
 
 class FirstKeyOfTest extends TestCase
 {
@@ -28,6 +29,6 @@ class FirstKeyOfTest extends TestCase
      */
     public function testValidOptions(array $input, mixed $expected): void
     {
-        $this->assertSame(\first_key_of($input), $expected);
+        $this->assertSame(first_key_of($input), $expected);
     }
 }

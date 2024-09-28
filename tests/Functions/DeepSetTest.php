@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\deep_set;
+
 class DeepSetTest extends TestCase
 {
     /**
@@ -36,10 +38,10 @@ class DeepSetTest extends TestCase
      */
     public function testImmutable(array $array, array $afterSetArr): void
     {
-        $resultString = \deep_set($array, 'assets.version', '2', true);
+        $resultString = deep_set($array, 'assets.version', '2', true);
         $this->assertSame($afterSetArr, $resultString);
 
-        $resultArray = \deep_set($array, ['assets', 'version'], '2', true);
+        $resultArray = deep_set($array, ['assets', 'version'], '2', true);
         $this->assertSame($afterSetArr, $resultArray);
     }
 
@@ -50,10 +52,10 @@ class DeepSetTest extends TestCase
      */
     public function testNotImmutable(array $array, array $afterSetArr): void
     {
-        \deep_set($array, 'assets.version', '2');
+        deep_set($array, 'assets.version', '2');
         $this->assertSame($afterSetArr, $array);
 
-        \deep_set($array, ['assets', 'version'], '2');
+        deep_set($array, ['assets', 'version'], '2');
         $this->assertSame($afterSetArr, $array);
     }
 }

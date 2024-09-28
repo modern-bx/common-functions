@@ -6,6 +6,8 @@ namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
 
+use function ModernBx\CommonFunctions\array_exclude_keys;
+
 class ArrayExcludeKeysTest extends TestCase
 {
     /**
