@@ -18,7 +18,7 @@ class DataAttrsTest extends TestCase
         return [
             [[], "", []],
             [[
-                "foo" => 1,
+                "foo" => "1",
                 "bar" => "derp",
             ], 'data-foo="1" data-bar="derp"', []],
             [[
@@ -34,7 +34,7 @@ class DataAttrsTest extends TestCase
 
     /**
      * @dataProvider caseProviderValidValue
-     * @param array<string, string|false> $input
+     * @param array<string, string|int|false|null> $input
      * @param string $expected
      */
     public function testValidOptions(array $input, string $expected): void

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 /** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
 
 namespace ModernBx\CommonFunctions;
@@ -89,7 +91,7 @@ if (!function_exists("format")) {
      * </code>
      *
      * @param string $message
-     * @param array<string, string> $pairs
+     * @param array<string, string|int> $pairs
      * @return string
      */
     function format(string $message, array $pairs = []): string
@@ -361,7 +363,7 @@ if (!function_exists("attrs")) {
     /**
      * Развертывает массив произвольных атрибутов и их значений в строку.
      *
-     * @param array<string, string|false> $attrs Ассоциативный массив атрибутов (ключ-значение)
+     * @param array<string, string|int|false|null> $attrs Ассоциативный массив атрибутов (ключ-значение)
      * @param string|callable $pattern Паттерн развертки
      * @return string
      */
@@ -382,8 +384,8 @@ if (!function_exists("attrs")) {
             } else {
                 $pair = format($pattern, [
                     "key" => $key,
-                    "value" => htmlspecialchars($value, ENT_QUOTES),
-                    "raw_value" => $value,
+                    "value" => htmlspecialchars((string) $value, ENT_QUOTES),
+                    "raw_value" => (string) $value,
                 ]);
             }
 
@@ -404,7 +406,7 @@ if (!function_exists("data_attrs")) {
     /**
      * Развертывает массив дата-атрибутов и их значений в строку.
      *
-     * @param array<string, string|false> $attrs Ассоциативный массив атрибутов (ключ-значение)
+     * @param array<string, string|int|false|null> $attrs Ассоциативный массив атрибутов (ключ-значение)
      * @return string
      */
     function data_attrs(array $attrs): string

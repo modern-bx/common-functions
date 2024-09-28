@@ -2,6 +2,8 @@
 
 /** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
 
+declare(strict_types=1);
+
 namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
@@ -46,7 +48,7 @@ class AttrsTest extends TestCase
 
     /**
      * @dataProvider caseProviderValidValue
-     * @param array<string, string|false> $input
+     * @param array<string, string|int|false|null> $input
      * @param string $expected
      * @param array<(callable(): mixed)|string> $args
      */

@@ -2,9 +2,12 @@
 
 /** @noinspection PhpPluralMixedCanBeReplacedWithArrayInspection */
 
+declare(strict_types=1);
+
 namespace ModernBx\CommonFunctions\Tests\Functions;
 
 use PHPUnit\Framework\TestCase;
+
 use function ModernBx\CommonFunctions\first_key_of;
 
 class FirstKeyOfTest extends TestCase

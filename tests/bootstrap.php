@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 $packageRoot = realpath(__DIR__ . "/../");
 
 require_once $packageRoot . "/vendor/autoload.php";
