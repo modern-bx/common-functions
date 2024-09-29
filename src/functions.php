@@ -124,10 +124,14 @@ if (!function_exists("array_exclude_keys")) {
             $subSrc = &$source;
             $length = count($path);
 
-            assert(is_array($subSrc));
+            // Совершенно бессмысленная проверка, чтобы PHPStan успокоился
+            // TODO: Обойти по-другому, предпочтительно через аннотации
+            if (!is_array($subSrc)) {
+                continue;
+            }
 
             foreach ($path as $index => $key) {
-                if (!array_key_exists($key, (array) $subSrc)) {
+                if (!array_key_exists($key, $subSrc)) {
                     break;
                 } elseif ($index == $length - 1) {
                     unset($subSrc[$key]);
@@ -230,9 +234,9 @@ if (!function_exists("deep_set")) {
      * @param array<string>|string $keys
      * @param mixed $value
      * @param bool $immutable
-     * @return mixed
+     * @return array<mixed>|null
      */
-    function deep_set(array &$ary, array|string $keys, mixed $value, bool $immutable = false): mixed
+    function deep_set(array &$ary, array|string $keys, mixed $value, bool $immutable = false): ?array
     {
         if (is_string($keys)) {
             $keys = explode(".", $keys);
@@ -246,7 +250,11 @@ if (!function_exists("deep_set")) {
             $pointer = &$ary;
         }
 
-        assert(is_array($pointer));
+        // Совершенно бессмысленная проверка, чтобы PHPStan успокоился
+        // TODO: Обойти по-другому, предпочтительно через аннотации
+        if (!is_array($pointer)) {
+            return null;
+        }
 
         while ($counter < count($keys) - 1) {
             $pointer = &$pointer[$keys[$counter++]];
@@ -288,7 +296,11 @@ if (!function_exists("deep_get")) {
         $counter = 0;
         $result = &$ary;
 
-        assert(is_array($result));
+        // Совершенно бессмысленная проверка, чтобы PHPStan успокоился
+        // TODO: Обойти по-другому, предпочтительно через аннотации
+        if (!is_array($result)) {
+            return null;
+        }
 
         while ($counter < count($keys)) {
             if (array_key_exists($keys[$counter], $result)) {
